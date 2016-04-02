@@ -11,10 +11,12 @@ public class Main : MonoBehaviour {
         world = gameObject.AddComponent<World>();
         draw = gameObject.AddComponent<Draw>();
         parameters = gameObject.AddComponent<Parameters>();
+
+        world.initialize();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    
 	}
 }

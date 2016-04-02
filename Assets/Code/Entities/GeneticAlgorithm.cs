@@ -11,12 +11,33 @@ namespace Assets.Code.Entities
         private float crossoverRate;
         private float mutationRate;
         private int numWeights;
+
+        private List<Entity> population;
+
         public GeneticAlgorithm(int populationSize, float crossoverRate, float mutationRate, int numWeights)
         {
             this.populationSize = populationSize;
             this.crossoverRate = crossoverRate;
             this.mutationRate = mutationRate;
             this.numWeights = numWeights;
+        }
+
+        public void initialize()
+        {
+            for (int i = 0; i < populationSize; i++)
+            {
+                population.Add(new Entity());
+            }
+        }
+
+        public List<Entity> getPopulation()
+        {
+            return this.population;
+        }
+
+        public void createNextGeneration()
+        {
+
         }
     }
 }

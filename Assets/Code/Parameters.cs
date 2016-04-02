@@ -3,8 +3,10 @@ using System.Collections;
 
 public class Parameters : MonoBehaviour {
     public const int numEntities = 20;
-	// Use this for initialization
-	void Start () {
+    public const float crossoverRate = 0.7f;
+    public const float mutationRate = 0.2f;
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
