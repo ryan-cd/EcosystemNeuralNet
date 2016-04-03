@@ -12,4 +12,21 @@ public class Draw : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void draw()
+    {
+        Debug.Log("draw");
+        for (int i = 0; i < Parameters.numFood; i++)
+        {
+            GameObject foodGO = GameObject.Find("food");
+            if (foodGO == null)
+            {
+                Debug.Log("in loop");
+                foodGO = new GameObject("food");
+                foodGO.AddComponent<SpriteRenderer>();
+                foodGO.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("food");
+                foodGO.transform.position = new Vector3(0, 0, 0);
+            }
+        }
+    }
 }

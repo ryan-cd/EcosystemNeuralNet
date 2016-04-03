@@ -13,6 +13,8 @@ public class Main : MonoBehaviour {
         parameters = gameObject.AddComponent<Parameters>();
 
         world.initialize();
+        draw.draw();
+        Debug.Log("hello");
 	}
 	
 	// Update is called once per frame

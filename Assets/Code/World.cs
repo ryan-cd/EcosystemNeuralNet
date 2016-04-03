@@ -19,6 +19,7 @@ public class World : MonoBehaviour {
 
     public void initialize()
     {
+        geneticAlgorithm = new GeneticAlgorithm(Parameters.populationSize, Parameters.crossoverRate, Parameters.mutationRate, Parameters.numWeights);
         geneticAlgorithm.initialize();
     }
 

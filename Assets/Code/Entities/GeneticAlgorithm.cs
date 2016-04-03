@@ -24,6 +24,7 @@ namespace Assets.Code.Entities
 
         public void initialize()
         {
+            population = new List<Entity>();
             for (int i = 0; i < populationSize; i++)
             {
                 population.Add(new Entity());
