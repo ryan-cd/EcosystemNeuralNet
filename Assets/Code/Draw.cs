@@ -21,7 +21,6 @@ public class Draw : MonoBehaviour {
 
     public void draw()
     {
-        Debug.Log("draw");
         if(foodList == null)
         {
             foodList = new List<GameObject>(Parameters.numFood);
@@ -29,13 +28,12 @@ public class Draw : MonoBehaviour {
 
         for (int i = 0; i < Parameters.numFood; i++)
         {
-            if (foodList.Count < i)
+            if (foodList.Count <= i)
             {
-                Debug.Log("in loop");
                 GameObject foodGO = new GameObject("food" + i);
                 foodGO.AddComponent<SpriteRenderer>();
                 foodGO.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("food");
-                foodGO.transform.position = new Vector3(i * 2 - 10, i * 2 - 10, 0);
+                foodGO.transform.position = new Vector3(Random.Range(-4.5f, 4.5f), Random.Range(-4.5f, 4.5f), 0);
                 foodList.Add(foodGO);
             }
         }
