@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Assets.Code.Entities
 {
-    class GeneticAlgorithm
+    public class GeneticAlgorithm
     {
         private int populationSize;
         private float crossoverRate;

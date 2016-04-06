@@ -2,8 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using Assets.Code.Entities;
+
 public class Draw : MonoBehaviour {
-    private List<GameObject> foodList;
+    private List<GameObject> foodGOList;
+    private List<GameObject> entityGOList;
 	// Use this for initialization
 	void Start () {
         
@@ -16,25 +19,51 @@ public class Draw : MonoBehaviour {
 
     public void initialize()
     {
-        foodList = new List<GameObject>(Parameters.numFood);
+        
     }
 
-    public void draw()
+    public void draw(List<Vector3> foodList, List<Entity> entityList)
     {
-        if(foodList == null)
+        drawFood(foodList);
+        drawEntities(entityList);
+    }
+
+    public void drawFood(List<Vector3> foodList)
+    {
+        if (foodGOList == null)
         {
-            foodList = new List<GameObject>(Parameters.numFood);
+            foodGOList = new List<GameObject>(Parameters.numFood);
         }
 
-        for (int i = 0; i < Parameters.numFood; i++)
+        for (int i = 0; i < foodList.Count; i++)
         {
-            if (foodList.Count <= i)
+            if (foodGOList.Count <= i)
             {
                 GameObject foodGO = new GameObject("food" + i);
                 foodGO.AddComponent<SpriteRenderer>();
                 foodGO.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("food");
-                foodGO.transform.position = new Vector3(Random.Range(-4.5f, 4.5f), Random.Range(-4.5f, 4.5f), 0);
-                foodList.Add(foodGO);
+                foodGO.transform.position = foodList[i];
+                foodGOList.Add(foodGO);
+            }
+        }
+    }
+
+    public void drawEntities(List<Entity> entityList)
+    {
+        if(entityGOList == null)
+        {
+            entityGOList = new List<GameObject>(Parameters.numEntities);
+        }
+
+        for (int i = 0; i < entityList.Count; i++)
+        {
+            if(entityGOList.Count <= i)
+            {
+                GameObject entityGO = new GameObject("entity" + i);
+                entityGO.AddComponent<SpriteRenderer>();
+                entityGO.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("entity");
+                entityGO.transform.position = entityList[i].getCoords();
+                entityGOList.Add(entityGO);
             }
         }
     }

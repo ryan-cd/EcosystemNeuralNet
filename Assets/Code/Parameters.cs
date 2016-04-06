@@ -7,6 +7,7 @@ public class Parameters : MonoBehaviour {
     public const float mutationRate = 0.2f;
     public const int numWeights = 6;
     public const int numFood = 10;
+    public const int numEntities = 10;
     // Use this for initialization
     void Start () {
 	

@@ -13,8 +13,7 @@ public class Main : MonoBehaviour {
         parameters = gameObject.AddComponent<Parameters>();
 
         world.initialize();
-        draw.draw();
-        Debug.Log("hello");
+        draw.draw(world.getFood(), world.getEntities());
 	}
 	
 	// Update is called once per frame
