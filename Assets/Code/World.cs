@@ -9,49 +9,49 @@ public class World : MonoBehaviour {
     public GeneticAlgorithm geneticAlgorithm;
     private List<Vector3> foodLocations;
 
-	// Use this for initialization
-	void Start () {
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		List<Entity> population = this.getEntities ();
+    // Use this for initialization
+    void Start () {
 
-		foreach (Entity e in population) {
-			e.closestFood = getClosestFoodDirection (e.coords);
+    }
 
-			Vector2 tankTreadPower = e.getTankTreadPower ();
-			float RotForce = Mathf.Clamp(tankTreadPower.x - tankTreadPower.y, -Parameters.maxTurnRate, Parameters.maxTurnRate);
-			e.rotation += RotForce;
+    // Update is called once per frame
+    void Update () {
+        List<Entity> population = this.getEntities ();
 
-			e.speed = (tankTreadPower.x + tankTreadPower.y) / 100.0f;
-			Vector3 lookAt = e.getLookAtVector ();
-			lookAt.Scale(new Vector3(e.speed, e.speed, e.speed));
-			e.coords += lookAt;
-		}
-	}
+        foreach (Entity e in population) {
+            e.closestFood = getClosestFoodDirection (e.coords);
 
-	public Vector3 getClosestFoodDirection(Vector3 entity)
-	{
-		float minDist = Mathf.Infinity;
-		Vector3 closestFood = new Vector3 ();
+            Vector2 tankTreadPower = e.getTankTreadPower ();
+            float RotForce = Mathf.Clamp(tankTreadPower.x - tankTreadPower.y, -Parameters.maxTurnRate, Parameters.maxTurnRate);
+            e.rotation += RotForce;
 
-		Vector3 lookAtVector = new Vector3 ();
+            e.speed = (tankTreadPower.x + tankTreadPower.y) / 100.0f;
+            Vector3 lookAt = e.getLookAtVector ();
+            lookAt.Scale(new Vector3(e.speed, e.speed, e.speed));
+            e.coords += lookAt;
+        }
+    }
 
-		foreach (Vector3 food in foodLocations) {
-			float dist = Vector3.Distance (entity, food);
-			if (dist < minDist)
-			{
-				minDist = dist;
-				closestFood = food;
-			}
-		}
+    public Vector3 getClosestFoodDirection(Vector3 entity)
+    {
+        float minDist = Mathf.Infinity;
+        Vector3 closestFood = new Vector3 ();
 
-		lookAtVector = (closestFood - entity).normalized;
+        Vector3 lookAtVector = new Vector3 ();
 
-		return lookAtVector;
-	}
+        foreach (Vector3 food in foodLocations) {
+            float dist = Vector3.Distance (entity, food);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                closestFood = food;
+            }
+        }
+
+        lookAtVector = (closestFood - entity).normalized;
+
+        return lookAtVector;
+    }
 
     public void initialize()
     {
