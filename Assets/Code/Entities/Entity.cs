@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Code.Entities
 {
-
+    [System.Serializable]
     public class Entity
 	{
 		// this problem
@@ -15,14 +15,16 @@ namespace Assets.Code.Entities
 		const int N_INPUTS = 4;
 		const int M_OUTPUTS = 2;
 
-        private Vector3 coords;
-        private float rotation;
+        public Vector3 coords;
+        public Vector3 lookAtVector;
+        public float rotation;
         private NeuralNetwork controller;
 
         public Entity()
         {
             this.coords = new Vector3(Random.Range(-4.5f, 4.5f), Random.Range(-4.5f, 4.5f), 0);
-            this.rotation = Random.Range(0, 360);
+            this.rotation = Random.Range(0, 2 * Mathf.PI);
+			this.lookAtVector = getLookAtVector();
 
 			float[] bias = new float[] { 1.0f, 1.0f	 };
 			this.controller = new NeuralNetwork(Entity.N_INPUTS, Entity.M_OUTPUTS, bias);
@@ -44,5 +46,10 @@ namespace Assets.Code.Entities
 
 			return controller.Run (inputs);
 		}
+
+        public Vector3 getLookAtVector()
+        {
+            return new Vector3(-1 * Mathf.Sin(this.rotation), Mathf.Cos(this.rotation), 0);
+        }
     }
 }

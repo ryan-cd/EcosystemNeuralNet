@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Assets.Code.Entities
 {
+    [Serializable]
     public class GeneticAlgorithm
     {
         private int populationSize;
@@ -12,7 +13,7 @@ namespace Assets.Code.Entities
         private float mutationRate;
         private int numWeights;
 
-        private List<Entity> population;
+        public List<Entity> population;
 
         public GeneticAlgorithm(int populationSize, float crossoverRate, float mutationRate, int numWeights)
         {
