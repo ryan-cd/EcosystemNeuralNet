@@ -4,9 +4,11 @@ using System.Collections.Generic;
 
 using Assets.Code.Entities;
 
+[System.Serializable]
 public class World : MonoBehaviour {
-    private GeneticAlgorithm geneticAlgorithm;
+    public GeneticAlgorithm geneticAlgorithm;
     private List<Vector3> foodLocations;
+    
 	// Use this for initialization
 	void Start () {
         

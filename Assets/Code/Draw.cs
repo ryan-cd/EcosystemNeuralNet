@@ -63,7 +63,7 @@ public class Draw : MonoBehaviour {
                 entityGO.AddComponent<SpriteRenderer>();
                 entityGO.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("entity");
                 entityGO.transform.position = entityList[i].getCoords();
-                entityGO.transform.eulerAngles = new Vector3(0, 0, entityList[i].getRotation());
+                entityGO.transform.eulerAngles = new Vector3(0, 0, toDegrees(entityList[i].getRotation()));
                 entityGOList.Add(entityGO);
             }
         }
@@ -76,5 +76,10 @@ public class Draw : MonoBehaviour {
             GameObject foodGO = GameObject.Find("Food" + i);
             Destroy(foodGO);
         }
+    }
+
+    public float toDegrees(float radians)
+    {
+        return radians * (180 / Mathf.PI);
     }
 }
