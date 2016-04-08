@@ -65,6 +65,21 @@ namespace Assets.Code.Entities
 
             return weights;
         }
+
+        public void setChromosome(List<float> weights)
+        {
+            for(int i = 0; i < hidden.Count; i++)
+            {
+                hidden[i].setWeights(
+                    weights.GetRange(i * hidden[i].getNumWeights(), hidden[i].getNumWeights()));
+            }
+
+            for (int i = 0; i < outputs.Count; i++)
+            {
+                outputs[i].setWeights(
+                    weights.GetRange(i * outputs[i].getNumWeights(), outputs[i].getNumWeights()));
+            }
+        }
     }
 
     [System.Serializable]
@@ -113,6 +128,23 @@ namespace Assets.Code.Entities
         public List<float> getWeights()
         {
             return this.weights;
+        }
+
+        public int getNumWeights()
+        {
+            return this.weights.Count;
+        }
+
+        public void setWeights(List<float> weights)
+        {
+            if (weights.Count == this.weights.Count)
+            {
+                this.weights = weights;
+            }
+            else
+            {
+                throw new System.ArgumentException("Trying to set weights with wrong number of weights");
+            }
         }
     }
 }

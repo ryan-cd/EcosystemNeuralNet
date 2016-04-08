@@ -64,7 +64,14 @@ namespace Assets.Code.Entities
 
         public void setChromosome(List<float> weights)
         {
-            //TODO: set the weights
+            if (weights.Count == getChromosome().Count)
+            {
+                controller.setChromosome(weights);
+            }
+            else
+            {
+                throw new System.ArgumentException("Trying to set weights with wrong number of weights");
+            }
         }
     }
 }
