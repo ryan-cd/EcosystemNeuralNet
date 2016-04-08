@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
@@ -22,7 +22,7 @@ namespace Assets.Code.Entities
 
 		public float speed;
         public float rotation;
-        private NeuralNetwork controller;
+        public NeuralNetwork controller;
 
         public Entity()
         {
@@ -47,7 +47,7 @@ namespace Assets.Code.Entities
 
 		public Vector2 getTankTreadPower()
 		{
-			float[] inputs = new float[] { lookAtVector.x, lookAtVector.y, closestFood.x, closestFood.y };
+			List<float> inputs = new List<float>() { lookAtVector.x, lookAtVector.y, closestFood.x, closestFood.y };
 
 			return controller.Run (inputs);
 		}
@@ -55,6 +55,16 @@ namespace Assets.Code.Entities
         public Vector3 getLookAtVector()
         {
             return new Vector3(-1 * Mathf.Sin(this.rotation), Mathf.Cos(this.rotation), 0);
+        }
+
+        public List<float> getChromosome()
+        {
+            return controller.getChromosome();
+        }
+
+        public void setChromosome(List<float> weights)
+        {
+            //TODO: set the weights
         }
     }
 }

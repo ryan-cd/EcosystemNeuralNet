@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -62,6 +62,10 @@ public class World : MonoBehaviour {
         }
         geneticAlgorithm = new GeneticAlgorithm(Parameters.populationSize, Parameters.crossoverRate, Parameters.mutationRate, Parameters.numWeights);
         geneticAlgorithm.initialize();
+
+        List<Entity> population = this.getEntities();
+        Debug.Log(population[0].getTankTreadPower());
+        Debug.Log("weight count " + population[0].getChromosome().Count);
     }
 
     public List<Entity> getEntities() {

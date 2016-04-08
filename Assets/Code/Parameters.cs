@@ -9,6 +9,7 @@ public class Parameters : MonoBehaviour {
     public const int numFood = 10;
     public const int numEntities = 10;
 	public const float maxTurnRate = 0.3f;
+    public const float bias = 0;
 
     // Use this for initialization
     void Start () {
