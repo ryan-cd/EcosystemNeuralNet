@@ -20,7 +20,7 @@ public class World : MonoBehaviour {
 
 		foreach (Entity e in population) {
 			// how update entity?
-			Debug.Log(e.getTankTreadPower());
+			//Debug.Log(e.getTankTreadPower());
 		}
 	}
 
@@ -33,6 +33,9 @@ public class World : MonoBehaviour {
         }
         geneticAlgorithm = new GeneticAlgorithm(Parameters.populationSize, Parameters.crossoverRate, Parameters.mutationRate, Parameters.numWeights);
         geneticAlgorithm.initialize();
+
+        List<Entity> population = this.getEntities();
+        Debug.Log(population[0].getTankTreadPower());
     }
 
     public List<Entity> getEntities() {

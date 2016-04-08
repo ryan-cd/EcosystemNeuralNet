@@ -8,6 +8,7 @@ public class Parameters : MonoBehaviour {
     public const int numWeights = 6;
     public const int numFood = 10;
     public const int numEntities = 10;
+    public const float bias = 0;
     // Use this for initialization
     void Start () {
 	

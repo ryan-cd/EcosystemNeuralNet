@@ -19,27 +19,34 @@ namespace Assets.Code.Entities
 
 		public NeuralNetwork(int inputs, int hidden, int outputs, float[] bias, float P = 1.0f)
 		{
-			// TODO hidden layer
 			for (int i = 0; i < hidden; i++)
 			{
-//				this.hidden.Add (new Neuron () );
+				this.hidden.Add (new Neuron (inputs, P) );
 			}
 
 			for(int i = 0; i < outputs; i++)
 			{
-				this.outputs.Add( new Neuron(inputs, P) );
+				this.outputs.Add( new Neuron(hidden, P) );
 			}
 			this.inputN = inputs;
 			this.outputP = outputs;
 			this.bias = bias;
 		}
 
-		public Vector2 Run(float[] inputs)
+		public Vector2 Run(List<float> inputs)
 		{
-			Vector2 output = new Vector2 ();
+            List<float> midwayOutputs = new List<float>();
+            Vector2 output = new Vector2 ();
 
-			output.x = this.outputs [0].Run (inputs, bias[0]);
-			output.y = this.outputs [1].Run (inputs, bias[1]);
+            Debug.Log("input length " + inputs.Count);
+            for (int i = 0; i < this.hidden.Count; i++)
+            {
+                midwayOutputs.Add(this.hidden[i].Run(inputs, Parameters.bias));
+            }
+            Debug.Log("Midway length " + midwayOutputs.Count);
+
+			output.x = this.outputs [0].Run (midwayOutputs, bias[0]);
+			output.y = this.outputs [1].Run (midwayOutputs, bias[1]);
 
 			return output;
 		}
@@ -69,9 +76,9 @@ namespace Assets.Code.Entities
             }
         }
 
-		public float Run(float[] inputs, float bias)
+		public float Run(List<float> inputs, float bias)
 		{
-			if (inputs.Length != this.numInputs - 1)
+			if (inputs.Count != this.numInputs - 1)
 			{
 				throw new System.ArgumentException("Inputs do not match the length.");
 			}

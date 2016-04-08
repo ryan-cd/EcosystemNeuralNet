@@ -43,7 +43,7 @@ namespace Assets.Code.Entities
 
 		public Vector2 getTankTreadPower()
 		{
-			float[] inputs = new float[] { 2.0f, 5.0f, 3.0f, 4.0f };
+			List<float> inputs = new List<float> { 2.0f, 5.0f, 3.0f, 4.0f };
 
 			return controller.Run (inputs);
 		}
