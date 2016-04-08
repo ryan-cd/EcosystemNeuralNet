@@ -36,6 +36,12 @@ public class World : MonoBehaviour {
 
         List<Entity> population = this.getEntities();
         Debug.Log(population[0].getTankTreadPower());
+        Debug.Log("weight count " + population[0].getChromosome().Count);
+        /*foreach (float f in population[0].getChromosome())
+        {
+            Debug.Log(f);
+        }*/
+        
     }
 
     public List<Entity> getEntities() {

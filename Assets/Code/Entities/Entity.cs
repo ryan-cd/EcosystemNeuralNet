@@ -52,5 +52,15 @@ namespace Assets.Code.Entities
         {
             return new Vector3(-1 * Mathf.Sin(this.rotation), Mathf.Cos(this.rotation), 0);
         }
+
+        public List<float> getChromosome()
+        {
+            return controller.getChromosome();
+        }
+
+        public void setChromosome(List<float> weights)
+        {
+            //TODO: set the weights
+        }
     }
 }

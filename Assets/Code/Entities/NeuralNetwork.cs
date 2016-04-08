@@ -51,9 +51,18 @@ namespace Assets.Code.Entities
 			return output;
 		}
 
-		public List<float> encode()
+		public List<float> getChromosome()
 		{
 			List<float> weights = new List<float> ();
+            for (int i = 0; i < hidden.Count; i++)
+            {
+                weights.AddRange(hidden[i].getWeights());
+            }
+            
+            for (int i = 0; i < outputs.Count; i++)
+            {
+                weights.AddRange(outputs[i].getWeights());
+            }
 
 			return weights;
 		}
@@ -98,5 +107,10 @@ namespace Assets.Code.Entities
 
 			return activation;
 		}
+
+        public List<float> getWeights()
+        {
+            return this.weights;
+        }
     }
 }
