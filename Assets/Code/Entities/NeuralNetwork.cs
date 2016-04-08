@@ -30,7 +30,7 @@ namespace Assets.Code.Entities
 				this.outputs.Add( new Neuron(inputs, P) );
 			}
 			this.inputN = inputs;
-			this.outputM = outputs;
+			this.outputP = outputs;
 			this.bias = bias;
 		}
 

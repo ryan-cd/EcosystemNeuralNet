@@ -13,7 +13,8 @@ namespace Assets.Code.Entities
 		// 4 inputs (Look_x, Look_y, Mine_direction_x, Mine_direction_y)
 		// 2 outputs ( Tread_x, Tread_y )
 		const int N_INPUTS = 4;
-		const int M_OUTPUTS = 2;
+		const int M_HIDDEN = 6;
+		const int P_OUTPUTS = 2;
 
         public Vector3 coords;
         public Vector3 lookAtVector;
@@ -27,7 +28,7 @@ namespace Assets.Code.Entities
 			this.lookAtVector = getLookAtVector();
 
 			float[] bias = new float[] { 1.0f, 1.0f	 };
-			this.controller = new NeuralNetwork(Entity.N_INPUTS, Entity.M_OUTPUTS, bias);
+			this.controller = new NeuralNetwork(Entity.N_INPUTS, Entity.M_HIDDEN, Entity.P_OUTPUTS, bias);
         }
 
         public Vector3 getCoords()
