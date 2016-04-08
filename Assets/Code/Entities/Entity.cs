@@ -3,10 +3,18 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+
 namespace Assets.Code.Entities
 {
+
     public class Entity
-    {
+	{
+		// this problem
+		// 4 inputs (Look_x, Look_y, Mine_direction_x, Mine_direction_y)
+		// 2 outputs ( Tread_x, Tread_y )
+		const int N_INPUTS = 4;
+		const int M_OUTPUTS = 2;
+
         private Vector3 coords;
         private float rotation;
         private NeuralNetwork controller;
@@ -15,6 +23,9 @@ namespace Assets.Code.Entities
         {
             this.coords = new Vector3(Random.Range(-4.5f, 4.5f), Random.Range(-4.5f, 4.5f), 0);
             this.rotation = Random.Range(0, 360);
+
+			float[] bias = new float[] { 1.0f, 1.0f	 };
+			this.controller = new NeuralNetwork(Entity.N_INPUTS, Entity.M_OUTPUTS, bias);
         }
 
         public Vector3 getCoords()
@@ -26,5 +37,12 @@ namespace Assets.Code.Entities
         {
             return this.rotation;
         }
+
+		public Vector2 getTankTreadPower()
+		{
+			float[] inputs = new float[] { 2.0f, 5.0f, 3.0f, 4.0f };
+
+			return controller.Run (inputs);
+		}
     }
 }

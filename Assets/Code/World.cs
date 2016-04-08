@@ -7,6 +7,7 @@ using Assets.Code.Entities;
 public class World : MonoBehaviour {
     private GeneticAlgorithm geneticAlgorithm;
     private List<Vector3> foodLocations;
+
 	// Use this for initialization
 	void Start () {
         
@@ -14,7 +15,12 @@ public class World : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		List<Entity> population = this.getEntities ();
+
+		foreach (Entity e in population) {
+			// how update entity?
+			Debug.Log(e.getTankTreadPower());
+		}
 	}
 
     public void initialize()
