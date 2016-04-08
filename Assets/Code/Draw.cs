@@ -7,6 +7,7 @@ using Assets.Code.Entities;
 public class Draw : MonoBehaviour {
     private List<GameObject> foodGOList;
     private List<GameObject> entityGOList;
+
 	// Use this for initialization
 	void Start () {
         
@@ -37,14 +38,14 @@ public class Draw : MonoBehaviour {
 
         for (int i = 0; i < foodList.Count; i++)
         {
-            if (foodGOList.Count <= i)
-            {
-                GameObject foodGO = new GameObject("food" + i);
-                foodGO.AddComponent<SpriteRenderer>();
-                foodGO.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("food");
-                foodGO.transform.position = foodList[i];
-                foodGOList.Add(foodGO);
-            }
+			if (foodGOList.Count <= i)
+			{
+				GameObject foodGO = new GameObject ("food" + i);
+				foodGO.AddComponent<SpriteRenderer> ();
+				foodGO.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("food");
+				foodGO.transform.position = foodList [i];
+				foodGOList.Add (foodGO);
+			}
         }
     }
 
@@ -57,15 +58,20 @@ public class Draw : MonoBehaviour {
 
         for (int i = 0; i < entityList.Count; i++)
         {
-            if(entityGOList.Count <= i)
-            {
-                GameObject entityGO = new GameObject("entity" + i);
-                entityGO.AddComponent<SpriteRenderer>();
-                entityGO.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("entity");
-                entityGO.transform.position = entityList[i].getCoords();
-                entityGO.transform.eulerAngles = new Vector3(0, 0, toDegrees(entityList[i].getRotation()));
-                entityGOList.Add(entityGO);
-            }
+			if (entityGOList.Count <= i)
+			{
+				GameObject entityGO = new GameObject ("entity" + i);
+				entityGO.AddComponent<SpriteRenderer> ();
+				entityGO.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("entity");
+				entityGO.transform.position = entityList [i].coords;
+				entityGO.transform.eulerAngles = new Vector3 (0, 0, toDegrees (entityList [i].rotation));
+				entityGOList.Add (entityGO);
+			}
+			else
+			{
+				entityGOList [i].transform.position = entityList [i].coords;
+				entityGOList [i].transform.eulerAngles = new Vector3 (0, 0, toDegrees (entityList [i].rotation));
+			}
         }
     }
 

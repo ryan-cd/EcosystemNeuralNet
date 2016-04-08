@@ -19,9 +19,38 @@ public class World : MonoBehaviour {
 		List<Entity> population = this.getEntities ();
 
 		foreach (Entity e in population) {
-			// how update entity?
-			Debug.Log(e.getTankTreadPower());
+			e.closestFood = getClosestFoodDirection (e.coords);
+
+			Vector2 tankTreadPower = e.getTankTreadPower ();
+			float RotForce = Mathf.Clamp(tankTreadPower.x - tankTreadPower.y, -Parameters.maxTurnRate, Parameters.maxTurnRate);
+			e.rotation += RotForce;
+
+			e.speed = (tankTreadPower.x + tankTreadPower.y) / 100.0f;
+			Vector3 lookAt = e.getLookAtVector ();
+			lookAt.Scale(new Vector3(e.speed, e.speed, e.speed));
+			e.coords += lookAt;
 		}
+	}
+
+	public Vector3 getClosestFoodDirection(Vector3 entity)
+	{
+		float minDist = Mathf.Infinity;
+		Vector3 closestFood = new Vector3 ();
+
+		Vector3 lookAtVector = new Vector3 ();
+
+		foreach (Vector3 food in foodLocations) {
+			float dist = Vector3.Distance (entity, food);
+			if (dist < minDist)
+			{
+				minDist = dist;
+				closestFood = food;
+			}
+		}
+
+		lookAtVector = (closestFood - entity).normalized;
+
+		return lookAtVector;
 	}
 
     public void initialize()

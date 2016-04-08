@@ -6,6 +6,7 @@ public class Main : MonoBehaviour {
     private World world = null;
     private Draw draw = null;
     private Parameters parameters = null;
+
 	// Use this for initialization
 	void Start () {
         world = gameObject.AddComponent<World>();
@@ -18,6 +19,6 @@ public class Main : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    
+		draw.draw(world.getFood(), world.getEntities());
 	}
 }

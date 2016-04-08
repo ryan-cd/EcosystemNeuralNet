@@ -18,12 +18,16 @@ namespace Assets.Code.Entities
 
         public Vector3 coords;
         public Vector3 lookAtVector;
+		public Vector3 closestFood;
+
+		public float speed;
         public float rotation;
         private NeuralNetwork controller;
 
         public Entity()
         {
             this.coords = new Vector3(Random.Range(-4.5f, 4.5f), Random.Range(-4.5f, 4.5f), 0);
+			this.speed = 0.0f;
             this.rotation = Random.Range(0, 2 * Mathf.PI);
 			this.lookAtVector = getLookAtVector();
 
@@ -43,7 +47,7 @@ namespace Assets.Code.Entities
 
 		public Vector2 getTankTreadPower()
 		{
-			float[] inputs = new float[] { 2.0f, 5.0f, 3.0f, 4.0f };
+			float[] inputs = new float[] { lookAtVector.x, lookAtVector.y, closestFood.x, closestFood.y };
 
 			return controller.Run (inputs);
 		}
