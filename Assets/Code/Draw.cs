@@ -63,6 +63,7 @@ public class Draw : MonoBehaviour {
                 entityGO.AddComponent<SpriteRenderer>();
                 entityGO.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("entity");
                 entityGO.transform.position = entityList[i].getCoords();
+                entityGO.transform.eulerAngles = new Vector3(0, 0, entityList[i].getRotation());
                 entityGOList.Add(entityGO);
             }
         }
