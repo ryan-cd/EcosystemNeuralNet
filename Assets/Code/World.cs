@@ -6,8 +6,12 @@ using Assets.Code.Entities;
 
 [System.Serializable]
 public class World : MonoBehaviour {
-    public GeneticAlgorithm geneticAlgorithm;
-    private List<Vector3> foodLocations;
+    private static GeneticAlgorithm geneticAlgorithm;
+    private static List<Vector3> foodLocations;
+
+    //This is a duplicate of the static geneticAlgorithm variable.
+    //It is non static to be viewed in the UnityEditor.
+    public GeneticAlgorithm geneticAlgorithmDuplicate;
 
     // Use this for initialization
     void Start () {
@@ -16,6 +20,8 @@ public class World : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        geneticAlgorithmDuplicate = World.geneticAlgorithm;
+
         List<Entity> population = this.getEntities ();
 
         foreach (Entity e in population) {
@@ -58,7 +64,8 @@ public class World : MonoBehaviour {
         foodLocations = new List<Vector3>();
         for (int i = 0; i < Parameters.numFood; i++)
         {
-            foodLocations.Add(new Vector3(Random.Range(-4.5f, 4.5f), Random.Range(-4.5f, 4.5f)));
+            foodLocations.Add(new Vector3(Random.Range(Parameters.minX, Parameters.maxX), 
+                                            Random.Range(Parameters.minY, Parameters.maxY)));
         }
         geneticAlgorithm = new GeneticAlgorithm(Parameters.populationSize, Parameters.crossoverRate, Parameters.mutationRate, Parameters.numWeights);
         geneticAlgorithm.initialize();
@@ -81,5 +88,14 @@ public class World : MonoBehaviour {
     public void createNextGeneration()
     {
         geneticAlgorithm.createNextGeneration();
+    }
+
+    public static void collide(int entityID, int foodID)
+    {
+        Debug.Log("entity" + entityID + "got food " + foodID);
+        foodLocations[foodID] = new Vector3(Random.Range(Parameters.minX, Parameters.maxX),
+                                            Random.Range(Parameters.minY, Parameters.maxY));
+        geneticAlgorithm.incrementFitness(entityID);
+
     }
 }

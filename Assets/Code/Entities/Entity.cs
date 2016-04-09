@@ -74,5 +74,10 @@ namespace Assets.Code.Entities
                 throw new System.ArgumentException("Trying to set weights with wrong number of weights");
             }
         }
+
+        public void incrementFitness()
+        {
+            this.fitness++;
+        }
     }
 }

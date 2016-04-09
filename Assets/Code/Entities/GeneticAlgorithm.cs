@@ -42,5 +42,10 @@ namespace Assets.Code.Entities
         {
 
         }
+
+        public void incrementFitness(int entityID)
+        {
+            population[entityID].incrementFitness();
+        }
     }
 }

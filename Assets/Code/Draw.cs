@@ -49,6 +49,10 @@ public class Draw : MonoBehaviour {
                 foodGO.transform.position = foodList [i];
                 foodGOList.Add (foodGO);
             }
+            else
+            {
+                foodGOList[i].transform.position = foodList[i];
+            }
         }
     }
 
