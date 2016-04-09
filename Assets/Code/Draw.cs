@@ -43,6 +43,9 @@ public class Draw : MonoBehaviour {
                 GameObject foodGO = new GameObject ("food" + i);
                 foodGO.AddComponent<SpriteRenderer> ();
                 foodGO.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("food");
+                foodGO.AddComponent<BoxCollider>();
+                foodGO.GetComponent<BoxCollider>().size = new Vector2(0.25f, 0.25f);
+                foodGO.GetComponent<BoxCollider>().isTrigger = true;
                 foodGO.transform.position = foodList [i];
                 foodGOList.Add (foodGO);
             }
@@ -63,6 +66,12 @@ public class Draw : MonoBehaviour {
                 GameObject entityGO = new GameObject ("entity" + i);
                 entityGO.AddComponent<SpriteRenderer> ();
                 entityGO.GetComponent<SpriteRenderer> ().sprite = Resources.Load<Sprite> ("entity");
+                entityGO.AddComponent<BoxCollider>();
+                entityGO.GetComponent<BoxCollider>().size = new Vector2(0.25f, 0.25f);
+                entityGO.GetComponent<BoxCollider>().isTrigger = true;
+                entityGO.AddComponent<EntityCollisions>();
+                entityGO.GetComponent<EntityCollisions>().setID(i);
+                entityGO.AddComponent<Rigidbody>();
                 entityGO.transform.position = entityList [i].coords;
                 entityGO.transform.eulerAngles = new Vector3 (0, 0, toDegrees (entityList [i].rotation));
                 entityGOList.Add (entityGO);
