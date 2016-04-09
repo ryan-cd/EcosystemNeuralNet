@@ -35,6 +35,15 @@ public class World : MonoBehaviour {
             Vector3 lookAt = e.getLookAtVector ();
             lookAt.Scale(new Vector3(e.speed, e.speed, e.speed));
             e.coords += lookAt;
+
+            if (e.coords.x > Parameters.maxX)
+                e.coords = new Vector3(e.coords.x - Parameters.maxX * 2, e.coords.y, 0);
+            else if (e.coords.x < Parameters.minX)
+                e.coords = new Vector3(e.coords.x + Parameters.maxX * 2, e.coords.y, 0);
+            else if (e.coords.y > Parameters.maxY)
+                e.coords = new Vector3(e.coords.x, e.coords.y - Parameters.maxY * 2, 0);
+            else if (e.coords.y < Parameters.minY)
+                e.coords = new Vector3(e.coords.x, e.coords.y + Parameters.maxY * 2, 0);
         }
     }
 
