@@ -13,6 +13,8 @@ namespace Assets.Code.Entities
         private float crossoverRate;
         private float mutationRate;
         private int numWeights;
+        private int totalFitness;
+        private int generation;
 
         public List<Entity> population;
 
@@ -40,12 +42,66 @@ namespace Assets.Code.Entities
 
         public void createNextGeneration()
         {
+            List<Entity> newPopulation = new List<Entity>();
+            while(newPopulation.Count < population.Count)
+            {
+                newPopulation.Add(createNewChild());
+            }
+            population.Clear();
+            population.AddRange(newPopulation);
+            this.totalFitness = 0;
+        }
 
+        private Entity createNewChild()
+        {
+            Entity child = new Entity();
+            List<float> childChromosome = null;
+            while(childChromosome == null)
+            {
+                childChromosome = crossover(getParentChromosome(), getParentChromosome());
+            }
+            child.setChromosome(childChromosome);
+            return child;
+        }
+
+        private List<float> getParentChromosome()
+        {
+            float slice = UnityEngine.Random.Range(0f, 1f) * totalFitness;
+            //Debug.Log("slice: " + slice + "total fitness: " + totalFitness);
+            int accumulatedFitness = 0;
+            for(int i = 0; i < population.Count; i++)
+            {
+                //Debug.Log("PARENT IS " + i);
+                accumulatedFitness += population[i].getFitness();
+                if (accumulatedFitness >= slice)
+                    return population[i].getChromosome();
+            }
+            throw new System.Exception("Could not select a parent chromosome");
+        }
+
+        private List<float> crossover(List<float> parent1, List<float> parent2)
+        {
+            if (parent1.SequenceEqual<float>(parent2) 
+                || !(UnityEngine.Random.Range(0f, 1f) <= Parameters.crossoverRate))
+                return null;
+            else
+            {
+                int index = (int)(UnityEngine.Random.Range(0f, 1f) * (parent1.Count - 2));
+                List<float> child = parent1.GetRange(0, index + 1);
+                child.AddRange(parent2.GetRange(index + 1, parent2.Count - (index + 1)));
+                return child;
+            }
         }
 
         public void incrementFitness(int entityID)
         {
             population[entityID].incrementFitness();
+            totalFitness++;
+            if(totalFitness > Parameters.populationSize)
+            {
+                Debug.Log("Generation " + ++generation);
+                createNextGeneration();
+            }
         }
     }
 }

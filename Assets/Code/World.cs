@@ -31,7 +31,7 @@ public class World : MonoBehaviour {
             float RotForce = Mathf.Clamp(tankTreadPower.x - tankTreadPower.y, -Parameters.maxTurnRate, Parameters.maxTurnRate);
             e.rotation += RotForce;
 
-            e.speed = (tankTreadPower.x + tankTreadPower.y) / 100.0f;
+            e.speed = (tankTreadPower.x + tankTreadPower.y) / 30.0f;
             Vector3 lookAt = e.getLookAtVector ();
             lookAt.Scale(new Vector3(e.speed, e.speed, e.speed));
             e.coords += lookAt;
@@ -101,7 +101,7 @@ public class World : MonoBehaviour {
 
     public static void collide(int entityID, int foodID)
     {
-        Debug.Log("entity" + entityID + "got food " + foodID);
+        //Debug.Log("entity" + entityID + "got food " + foodID);
         foodLocations[foodID] = new Vector3(Random.Range(Parameters.minX, Parameters.maxX),
                                             Random.Range(Parameters.minY, Parameters.maxY));
         geneticAlgorithm.incrementFitness(entityID);

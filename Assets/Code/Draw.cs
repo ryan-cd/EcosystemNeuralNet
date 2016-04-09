@@ -60,7 +60,7 @@ public class Draw : MonoBehaviour {
     {
         if(entityGOList == null)
         {
-            entityGOList = new List<GameObject>(Parameters.numEntities);
+            entityGOList = new List<GameObject>(Parameters.populationSize);
         }
 
         for (int i = 0; i < entityList.Count; i++)

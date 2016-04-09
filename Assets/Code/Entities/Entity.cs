@@ -79,5 +79,10 @@ namespace Assets.Code.Entities
         {
             this.fitness++;
         }
+
+        public int getFitness()
+        {
+            return this.fitness;
+        }
     }
 }
