@@ -6,32 +6,29 @@ using UnityEngine;
 
 namespace Assets.Code.Entities
 {
-
-    // No hidden layers.
     [System.Serializable]
     public class NeuralNetwork
     {
         public List<Neuron> hidden = new List<Neuron> ();
         public List<Neuron> outputs = new List<Neuron> ();
-        private int inputN;
-        private int hiddenM;
-        private int outputP;
-        private float[] bias;
+        private int numInputs;
+        private int numHiddenNeurons;
+        private int numOutputNeurons;
 
-        public NeuralNetwork(int inputs, int hidden, int outputs, float[] bias, float P = 1.0f)
+        public NeuralNetwork(int numInputs, int numHiddenNeurons, int numOutputNeurons)
         {
-            for (int i = 0; i < hidden; i++)
+            for (int i = 0; i < numHiddenNeurons; i++)
             {
-                this.hidden.Add (new Neuron (inputs, P) );
+                this.hidden.Add (new Neuron (numInputs, Parameters.P) );
             }
 
-            for(int i = 0; i < outputs; i++)
+            for(int i = 0; i < numOutputNeurons; i++)
             {
-                this.outputs.Add( new Neuron(hidden, P) );
+                this.outputs.Add( new Neuron(numHiddenNeurons, Parameters.P) );
             }
-            this.inputN = inputs;
-            this.outputP = outputs;
-            this.bias = bias;
+            this.numInputs = numInputs;
+            this.numHiddenNeurons = numHiddenNeurons;
+            this.numOutputNeurons = numOutputNeurons;
         }
 
         public Vector2 Run(List<float> inputs)
@@ -44,8 +41,8 @@ namespace Assets.Code.Entities
                 midwayOutputs.Add(this.hidden[i].Run(inputs, Parameters.bias));
             }
 
-            output.x = this.outputs [0].Run (midwayOutputs, bias[0]);
-            output.y = this.outputs [1].Run (midwayOutputs, bias[1]);
+            output.x = this.outputs [0].Run (midwayOutputs, Parameters.bias);
+            output.y = this.outputs [1].Run (midwayOutputs, Parameters.bias);
 
             return output;
         }
@@ -90,15 +87,13 @@ namespace Assets.Code.Entities
         public List<float> weights = new List<float>();
         static System.Random random = new System.Random((int)DateTime.Now.Ticks);
 
-        public Neuron(int numInputs, float p = 1.0f)
+        public Neuron(int numInputs, float p = Parameters.bias)
         {
-            //Debug.Log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             this.P = p;
             this.numInputs = ++numInputs;
             for(int i = 0; i < this.numInputs; i++)
             {
                 weights.Add( (float)(Neuron.random.NextDouble() * 2 - 1));
-                //Debug.Log(weights[i]);
             }
         }
 

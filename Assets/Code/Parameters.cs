@@ -10,6 +10,12 @@ public class Parameters : MonoBehaviour {
     public const int numEntities = 10;
     public const float maxTurnRate = 0.3f;
     public const float bias = 0;
+    public const float P = 1.0f;
+    public const float minX = -4.5f;
+    public const float maxX = 4.5f;
+    public const float minY = -4.5f;
+    public const float maxY = 4.5f;
+
 
     // Use this for initialization
     void Start () {

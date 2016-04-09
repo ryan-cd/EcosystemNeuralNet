@@ -23,16 +23,17 @@ namespace Assets.Code.Entities
         public float speed;
         public float rotation;
         public NeuralNetwork controller;
+        public int fitness;
 
         public Entity()
         {
-            this.coords = new Vector3(Random.Range(-4.5f, 4.5f), Random.Range(-4.5f, 4.5f), 0);
+            this.coords = new Vector3(Random.Range(Parameters.minX, Parameters.maxX), 
+                                        Random.Range(Parameters.minY, Parameters.maxY), 0);
             this.speed = 0.0f;
             this.rotation = Random.Range(0, 2 * Mathf.PI);
             this.lookAtVector = getLookAtVector();
-
-            float[] bias = new float[] { 1.0f, 1.0f  };
-            this.controller = new NeuralNetwork(Entity.N_INPUTS, Entity.M_HIDDEN, Entity.P_OUTPUTS, bias);
+            
+            this.controller = new NeuralNetwork(Entity.N_INPUTS, Entity.M_HIDDEN, Entity.P_OUTPUTS);
         }
 
         public Vector3 getCoords()
