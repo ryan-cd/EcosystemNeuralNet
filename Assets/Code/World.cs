@@ -80,9 +80,6 @@ public class World : MonoBehaviour {
         geneticAlgorithm.initialize();
 
         List<Entity> population = this.getEntities();
-
-        Debug.Log(population[0].getTankTreadPower());
-        Debug.Log("weight count " + population[0].getChromosome().Count);
     }
 
     public List<Entity> getEntities() {

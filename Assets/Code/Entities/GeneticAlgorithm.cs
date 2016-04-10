@@ -24,6 +24,7 @@ namespace Assets.Code.Entities
             this.crossoverRate = crossoverRate;
             this.mutationRate = mutationRate;
             this.numWeights = numWeights;
+            this.generation = 1;
         }
 
         public void initialize()
@@ -97,9 +98,10 @@ namespace Assets.Code.Entities
         {
             population[entityID].incrementFitness();
             totalFitness++;
-            if(totalFitness > Parameters.populationSize)
+            if(totalFitness > Parameters.populationSize * generation)
             {
-                Debug.Log("Generation " + ++generation);
+                Debug.Log("Generation " + generation++ 
+                    + " concludes with avg fitness: " + totalFitness / Parameters.populationSize);
                 createNextGeneration();
             }
         }
