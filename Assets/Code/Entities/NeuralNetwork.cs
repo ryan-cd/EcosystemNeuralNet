@@ -87,7 +87,7 @@ namespace Assets.Code.Entities
         public List<float> weights = new List<float>();
         static System.Random random = new System.Random((int)DateTime.Now.Ticks);
 
-        public Neuron(int numInputs, float p = Parameters.bias)
+        public Neuron(int numInputs, float p = Parameters.P)
         {
             this.P = p;
             this.numInputs = ++numInputs;

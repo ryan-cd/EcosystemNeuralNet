@@ -61,6 +61,7 @@ namespace Assets.Code.Entities
             {
                 childChromosome = crossover(getParentChromosome(), getParentChromosome());
             }
+            childChromosome = mutate(childChromosome);
             child.setChromosome(childChromosome);
             return child;
         }
@@ -92,6 +93,20 @@ namespace Assets.Code.Entities
                 child.AddRange(parent2.GetRange(index + 1, parent2.Count - (index + 1)));
                 return child;
             }
+        }
+
+        private List<float> mutate(List<float> input)
+        {
+            List<float> output = new List<float>();
+            output.AddRange(input);
+            for(int i = 0; i < input.Count; i++)
+            {
+                if(UnityEngine.Random.Range(0f, 1f) < Parameters.mutationRate)
+                {
+                    output[i] += UnityEngine.Random.Range(-1f, 1f) * Parameters.maxPertubation;
+                }
+            }
+            return output;
         }
 
         public void incrementFitness(int entityID)

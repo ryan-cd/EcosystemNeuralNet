@@ -31,7 +31,7 @@ public class World : MonoBehaviour {
             float RotForce = Mathf.Clamp(tankTreadPower.x - tankTreadPower.y, -Parameters.maxTurnRate, Parameters.maxTurnRate);
             e.rotation += RotForce;
 
-            e.speed = (tankTreadPower.x + tankTreadPower.y) / 20.0f;
+            e.speed = (tankTreadPower.x + tankTreadPower.y) / Parameters.speedLimiter;
             Vector3 lookAt = e.getLookAtVector ();
             lookAt.Scale(new Vector3(e.speed, e.speed, e.speed));
             e.coords += lookAt;
