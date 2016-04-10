@@ -97,6 +97,7 @@ namespace Assets.Code.Entities
         public void incrementFitness(int entityID)
         {
             population[entityID].incrementFitness();
+            updateFittestEntities();
             totalFitness++;
             if(totalFitness > Parameters.populationSize * generation)
             {
@@ -104,6 +105,21 @@ namespace Assets.Code.Entities
                     + " concludes with avg fitness: " + totalFitness / Parameters.populationSize);
                 createNextGeneration();
             }
+        }
+
+        public void updateFittestEntities()
+        {
+            int fittestIndex = 0;
+            for(int i = 0; i < populationSize; i++)
+            {
+                if(population[i].getFitness() > population[fittestIndex].getFitness())
+                {
+                    fittestIndex = i;
+                }
+                population[i].setIsTopPerformer(false);
+            }
+            population[fittestIndex].setIsTopPerformer(true);
+            //Debug.Log("assigned " + fittestIndex);
         }
     }
 }

@@ -24,6 +24,7 @@ namespace Assets.Code.Entities
         public float rotation;
         public NeuralNetwork controller;
         public int fitness;
+        public bool isTopPerformer;
 
         public Entity()
         {
@@ -73,6 +74,16 @@ namespace Assets.Code.Entities
             {
                 throw new System.ArgumentException("Trying to set weights with wrong number of weights");
             }
+        }
+
+        public void setIsTopPerformer(bool topPerformer)
+        {
+            this.isTopPerformer = topPerformer;
+        }
+
+        public bool getIsTopPerformer()
+        {
+            return this.isTopPerformer;
         }
 
         public void incrementFitness()

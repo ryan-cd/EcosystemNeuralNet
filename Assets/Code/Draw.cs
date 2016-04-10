@@ -84,6 +84,11 @@ public class Draw : MonoBehaviour {
             {
                 entityGOList [i].transform.position = entityList [i].coords;
                 entityGOList [i].transform.eulerAngles = new Vector3 (0, 0, toDegrees (entityList [i].rotation));
+                entityGOList[i].GetComponent<SpriteRenderer>().color = Color.white;
+                if (entityList[i].getIsTopPerformer())
+                {
+                    entityGOList[i].GetComponent<SpriteRenderer>().color = Color.black;
+                }
             }
         }
     }
@@ -92,7 +97,7 @@ public class Draw : MonoBehaviour {
     {
         for (int i = 0; i < Parameters.numFood; i++)
         {
-            GameObject foodGO = GameObject.Find("Food" + i);
+            GameObject foodGO = GameObject.Find("food" + i);
             Destroy(foodGO);
         }
     }
